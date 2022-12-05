@@ -92,6 +92,11 @@ DJOSER = {
 
 # TODO здесь необходимо настроить подключение к БД
 DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ads_online_db',
+        'USER':
+    }
 }
 
 
