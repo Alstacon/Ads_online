@@ -7,9 +7,16 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.routers import SimpleRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+from ads.views import AdViewSet
+
 users_router = SimpleRouter()
 
 users_router.register('users', UserViewSet, basename='users')
+
+router = SimpleRouter()
+
+router.register('api/ads', AdViewSet, basename='ads')
+
 
 urlpatterns = [
     path("api/admin/", admin.site.urls),
@@ -23,4 +30,6 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view())
 
 ]
+
+urlpatterns += router.urls
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
