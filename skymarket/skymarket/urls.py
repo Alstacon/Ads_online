@@ -14,7 +14,7 @@ from ads.views import AdViewSet, CommentViewSet
 
 users_router = SimpleRouter()
 
-users_router.register('users', UserViewSet, basename='users')
+users_router.register('api/users', UserViewSet, basename='users')
 
 router = SimpleRouter()
 
@@ -36,11 +36,13 @@ urlpatterns = [
     path('api/shema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger'),
 
     path('', include(users_router.urls)),
-    path('token/', TokenObtainPairView.as_view()),
-    path('token/refresh/', TokenRefreshView.as_view())
+    path('api/token/', TokenObtainPairView.as_view()),
+    path('api/refresh/', TokenRefreshView.as_view())
 
 ]
 
 urlpatterns += router.urls
 urlpatterns += comments_router.urls
+urlpatterns += users_router.urls
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

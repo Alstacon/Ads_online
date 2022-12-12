@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import pagination, viewsets
 
 from ads.models import Ad, Comment
@@ -6,6 +7,8 @@ from ads.models import Ad, Comment
 from ads.serializers import AdSerializer, AdDetailSerializer, CommentSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
+
+from ads.filters import AdFilter
 
 
 class AdPagination(pagination.PageNumberPagination):
@@ -19,6 +22,8 @@ class AdViewSet(viewsets.ModelViewSet):
     queryset = Ad.objects.all()
     default_serializer_class = AdDetailSerializer
     pagination_class = AdPagination
+    filter_backends = (DjangoFilterBackend, )
+    filterset_class = AdFilter
 
     serializers = {
         'list': AdSerializer,

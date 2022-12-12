@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "redoc",
     "drf_spectacular",
     "corsheaders",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
