@@ -32,6 +32,7 @@ class Ad(models.Model):
     def __str__(self):
         return self.title
 
+
 class Comment(models.Model):
     text = models.CharField(max_length=300)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -41,3 +42,16 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
+
+    @property
+    def author_first_name(self):
+        return self.author.first_name if self.author else None
+
+    @property
+    def author_last_name(self):
+        return self.author.last_name if self.author else None
+
+    @property
+    def author_image(self):
+        return self.author.image if self.author else None
+

@@ -1,13 +1,8 @@
 from rest_framework import serializers
 
-from ads.models import Ad
+from ads.models import Ad, Comment
 
 from users.models import User
-
-
-class CommentSerializer(serializers.ModelSerializer):
-    # TODO сериалайзер для модели
-    pass
 
 
 class AdSerializer(serializers.ModelSerializer):
@@ -27,5 +22,14 @@ class AdDetailSerializer(serializers.ModelSerializer):
         exclude = ['author', 'created_at']
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    author_id = serializers.IntegerField(required=False)
+    author_first_name = serializers.CharField(max_length=50, required=False)
+    author_last_name = serializers.CharField(max_length=50, required=False)
+    author_image = serializers.ImageField(required=False)
+    ad_id = serializers.IntegerField(required=False)
 
+    class Meta:
+        model = Comment
+        exclude = ['author', 'ad']
 

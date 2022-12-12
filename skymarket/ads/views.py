@@ -1,8 +1,9 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import pagination, viewsets
 
-from ads.models import Ad
+from ads.models import Ad, Comment
 
-from ads.serializers import AdSerializer, AdDetailSerializer
+from ads.serializers import AdSerializer, AdDetailSerializer, CommentSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -49,8 +50,18 @@ class AdViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-
-
-
 class CommentViewSet(viewsets.ModelViewSet):
-    pass
+    queryset = Comment.objects.all().select_related('ad')
+    serializer_class = CommentSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        ad_id = self.kwargs.get('ad_pk')
+        ad = get_object_or_404(Ad, pk=ad_id)
+
+        return self.queryset.filter(ad=ad)
+
+
+    def perform_create(self, serializer, *args, **kwargs):
+        serializer.save(author=self.request.user, ad_id=self.kwargs.get('ad_pk'))
+
+

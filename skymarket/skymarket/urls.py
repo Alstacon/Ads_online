@@ -5,9 +5,12 @@ from django.conf.urls.static import static
 from djoser.views import UserViewSet
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.routers import SimpleRouter
+from rest_framework_nested import routers
+from rest_framework_nested.routers import NestedSimpleRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from ads.views import AdViewSet
+from ads.views import AdViewSet, CommentViewSet
+
 
 users_router = SimpleRouter()
 
@@ -17,6 +20,13 @@ router = SimpleRouter()
 
 router.register('api/ads', AdViewSet, basename='ads')
 
+comments_router = NestedSimpleRouter(
+    router,
+    'api/ads',
+    lookup='ad'
+)
+
+comments_router.register('comments', CommentViewSet, basename='ad_comments')
 
 urlpatterns = [
     path("api/admin/", admin.site.urls),
@@ -32,4 +42,5 @@ urlpatterns = [
 ]
 
 urlpatterns += router.urls
+urlpatterns += comments_router.urls
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
