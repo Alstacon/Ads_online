@@ -6,9 +6,12 @@ from ads.models import Ad, Comment
 
 from ads.serializers import AdSerializer, AdDetailSerializer, CommentSerializer
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
 from ads.filters import AdFilter
+
+from ads.permissions import IsOwnerOrStaff
 
 
 class AdPagination(pagination.PageNumberPagination):
@@ -34,11 +37,25 @@ class AdViewSet(viewsets.ModelViewSet):
         'retrieve': Ad.objects.select_related('author')
     }
 
+    default_permission = [AllowAny(), ]
+    permission_classes = {
+        'retrieve': [IsAuthenticated(), ],
+        'create': [IsAuthenticated(), ],
+        'update': [IsAuthenticated(), IsOwnerOrStaff(), ],
+        'partial_update': [IsAuthenticated(), IsOwnerOrStaff(), ],
+        'destroy': [IsAuthenticated(), IsOwnerOrStaff(), ],
+
+
+    }
+
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.default_serializer_class)
 
     def get_queryset(self):
         return self.querysets.get(self.action, self.default_queryset)
+
+    def get_permissions(self):
+        return self.permission_classes.get(self.action, self.default_permission)
 
     @action(detail=False, url_path='me')
     def my_ads(self, request):
@@ -59,11 +76,24 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all().select_related('ad')
     serializer_class = CommentSerializer
 
+    default_permission = [AllowAny(), ]
+    permission_classes = {
+        'retrieve': [IsAuthenticated(), ],
+        'create': [IsAuthenticated(), ],
+        'update': [IsAuthenticated(), IsOwnerOrStaff(), ],
+        'partial_update': [IsAuthenticated(), IsOwnerOrStaff(), ],
+        'destroy': [IsAuthenticated(), IsOwnerOrStaff(), ],
+
+    }
+
     def get_queryset(self, *args, **kwargs):
         ad_id = self.kwargs.get('ad_pk')
         ad = get_object_or_404(Ad, pk=ad_id)
 
         return self.queryset.filter(ad=ad)
+
+    def get_permissions(self):
+        return self.permission_classes.get(self.action, self.default_permission)
 
 
     def perform_create(self, serializer, *args, **kwargs):
