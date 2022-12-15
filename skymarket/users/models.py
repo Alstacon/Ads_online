@@ -24,6 +24,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(unique=True)
     role = models.CharField(max_length=5, choices=UserRoles.choices, default=UserRoles.USER)
     image = models.ImageField(upload_to='avatars/', default=None, null=True)
+    is_active = models.BooleanField(default=True)
 
     @property
     def is_admin(self):
