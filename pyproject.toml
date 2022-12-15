@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "ads-online"
+version = "0.1.0"
+description = ""
+authors = ["alstacon <alstacon@gmail.com>"]
+readme = "README.md"
+packages = [{include = "ads_online"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+drf-spectacular = "^0.25.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
