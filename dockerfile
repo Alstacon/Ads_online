@@ -22,4 +22,4 @@ COPY skymarket/users users
 COPY entrypoint.sh entrypoint.sh
 
 
-ENTRYPOINT ["bash"git "entrypoint.sh"]
+ENTRYPOINT ["bash", "entrypoint.sh"]

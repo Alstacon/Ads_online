@@ -22,9 +22,9 @@ services:
     build:
       context: ..
       args:
-        POSTGRES_USER: skymarket
-        POSTGRES_PASSWORD: skymarket
-        POSTGRES_DB: skymarket
+        POSTGRES_USER: ${DB_USER}
+        POSTGRES_PASSWORD: ${DB_PASSWORD}
+        POSTGRES_DB: ${DB_NAME}
     environment:
       POSTGRES_HOST: db
     depends_on:
