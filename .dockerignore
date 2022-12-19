@@ -1,0 +1,9 @@
+#ignore all
+**
+
+# except
+
+!skymarket/**
+!skymarket/entrypoint.sh
+!skymarket/poetry.lock
+!skymarket/pyproject.toml
