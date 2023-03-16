@@ -1,5 +1,5 @@
 ### 🛒 AviCon —
-An advertisements website with JWT authentication, separation of roles and password recovery vai email.
+An advertisements website with JWT authentication, separation of roles and password recovery via email.
 ___
 
 ### Back-end functionality:
