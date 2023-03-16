@@ -1,25 +1,30 @@
-## Курсовая работа №6
-### Сайт объявлений
+## 🛒 AviCon —
+### An advertisements website.
+__
 
-Бэкенд функционал:
+### Back-end functionality:
 
-- Авторизация и аутентификация пользователей.
-- Распределение ролей между пользователями (пользователь и админ).
-- Восстановление пароля через электронную почту.
-- CRUD для объявлений на сайте.
-- Разграничение доступа к редактированию/удалению объявлений.
-- Под каждым объявлением пользователи могут оставлять отзывы.
-- В заголовке сайта можно осуществлять поиск объявлений по названию.
+- User authorization and authentication.
+- Distribution of roles between users.
+- Password recovery via Email.
+- CRUD for ads on the site.
+- Differentiation of access to editing/deleting ads.
+- Under each ad, users can leave reviews.
+- In the site header, you can search for ads by name.
+__
 
-### Стек:
+### Tech stack:
     - Python 3.10
     - Django
     - DRF
     - Djoser
     - Postgres (one2many, many2many, QuerySet, Aggregate, Join, Lookups)
     - SimpleJWT
-
-### Запуск:
-1) Переходим в папку backend_compose.
-2) Выполняем команду docker-compose up --build -d.
+__
+## Usage:
+1) Clone the repository
+`git clone https://github.com/Alstacon/ToDoCon.git`.
+2)Go to backend_compose.
+3) Change `.env.example`'s file name for `.env` and fill it with valid parameters.
+4) Run docker `docker-compose up --build -d`.
 
