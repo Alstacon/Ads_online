@@ -24,7 +24,7 @@ ___
 ### Usage:
 1) Clone the repository
 `git clone https://github.com/Alstacon/ToDoCon.git`.
-2)Go to backend_compose.
+2) Go to backend_compose.
 3) Change `.env.example`'s file name for `.env` and fill it with valid parameters.
 4) Run docker `docker-compose up --build -d`.
 
