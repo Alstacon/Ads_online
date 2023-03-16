@@ -1,6 +1,6 @@
-## 🛒 AviCon —
-### An advertisements website.
-__
+### 🛒 AviCon —
+An advertisements website with JWT authentication, separation of roles and password recovery vai email.
+___
 
 ### Back-end functionality:
 
@@ -11,7 +11,7 @@ __
 - Differentiation of access to editing/deleting ads.
 - Under each ad, users can leave reviews.
 - In the site header, you can search for ads by name.
-__
+___
 
 ### Tech stack:
     - Python 3.10
@@ -20,8 +20,8 @@ __
     - Djoser
     - Postgres (one2many, many2many, QuerySet, Aggregate, Join, Lookups)
     - SimpleJWT
-__
-## Usage:
+___
+### Usage:
 1) Clone the repository
 `git clone https://github.com/Alstacon/ToDoCon.git`.
 2)Go to backend_compose.
